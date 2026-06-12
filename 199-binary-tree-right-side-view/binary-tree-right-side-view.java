@@ -14,18 +14,20 @@
  * }
  */
 class Solution {
-    List<Integer> ans=new ArrayList<>();
-    public void rec(TreeNode root,int level){
-        if(root==null) return;
-        if(level==ans.size()) ans.add(root.val);
-        rec(root.right,level+1);
-        rec(root.left,level+1);
-        
-
-    }
     public List<Integer> rightSideView(TreeNode root) {
-        rec(root,0);
-        return ans;
-        
+        List<Integer>res=new ArrayList<>();
+        Queue<TreeNode>q=new LinkedList<>();
+        if(root==null) return res;
+        q.add(root);
+        while(!q.isEmpty()){
+            int n=q.size();
+            for(int i=0;i<n;i++){
+                TreeNode r=q.remove();
+                if(i==n-1) res.add(r.val);
+                if(r.left!=null) q.add(r.left);
+                if(r.right!=null) q.add(r.right);
+            }            
+        }
+        return res;
     }
 }
