@@ -13,25 +13,20 @@ class Solution {
         m.put('9',"wxyz");
 
         back(digits,new StringBuilder(),0,m,res);
-
         return res;
     }
 
-    public void back(String digit, StringBuilder combo,
-    int idx, Map<Character,String> m,
-    List<String> res)
-    {
+    public void back(String digit, StringBuilder combo, int idx, Map<Character, String> m, List<String> res) {
         if (idx == digit.length()) {
             res.add(combo.toString());
             return;
         }
-        String letter=m.get(digit.charAt(idx));
-        for(char ch:letter.toCharArray()){
+        String letter = m.get(digit.charAt(idx));
+        for (char ch : letter.toCharArray()) {
             combo.append(ch);
-            back(digit,combo,idx+1,m,res);
-            combo.deleteCharAt(combo.length()-1);
+            back(digit, combo, idx + 1, m, res);
+            combo.deleteCharAt(combo.length() - 1);
         }
-        
 
     }
 }
