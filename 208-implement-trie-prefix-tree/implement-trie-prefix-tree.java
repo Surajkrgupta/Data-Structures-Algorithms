@@ -4,7 +4,6 @@ class Node{
 }
 class Trie {
     Node root;
-
     public Trie() {
         root=new Node();
     }
@@ -14,11 +13,8 @@ class Trie {
         Node t=root;
         for(int i=0;i<n;i++){
             int idx=word.charAt(i)-'a';
-            if(t.child[idx]==null){
-                t.child[idx]=new Node();
-            }
+            if(t.child[idx]==null) t.child[idx]=new Node();
             t=t.child[idx];
-            
         }
         t.end=true;
     }
@@ -42,8 +38,7 @@ class Trie {
             if(t.child[idx]==null) return false;
             t=t.child[idx];
         }
-        return  true;
-
+        return true;
     }
 }
 
