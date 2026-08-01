@@ -1,33 +1,35 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> ans = new ArrayList<>();
         Arrays.sort(nums);
-
-        int tar = 0;
+        List<List<Integer>> res = new ArrayList<>();
         int n = nums.length;
+        int i = 0;
+        Set<List<Integer>> set = new HashSet<>();
 
-        for (int i = 0; i < n; i++) {
-            if(i>0 && nums[i]==nums[i-1]) continue;
-            int ntar = tar - nums[i];
-            int li = i + 1;
-            int ri = n - 1;
-            while (li < ri) {
-                if (nums[li] + nums[ri] < ntar)
-                    li++;
-                else if (nums[li] + nums[ri] > ntar)
-                    ri--;
-                else {
-                    ans.add(Arrays.asList(nums[i], nums[li], nums[ri]));
-                    li++;
-                    ri--;
-                    while(li<ri && nums[li]==nums[li-1]) li++;
-                    while(li<ri && nums[ri]==nums[ri]+1) ri--;
-
-                }
-
+        while (i < n - 2) {
+            int j = i + 1;
+            int k = n - 1;
+            int target = 0 - nums[i];
+            while (j < k) {
+                if ((nums[i] + nums[j] + nums[k]) == 0) {
+                    ArrayList<Integer> t = new ArrayList<>();
+                    t.add(nums[i]);
+                    t.add(nums[j]);
+                    t.add(nums[k]);
+                    Collections.sort(t);
+                    if (!set.contains(t)) {
+                        res.add(t);
+                        set.add(t);
+                    }
+                    j++;
+                    k--;
+                } else if (nums[i] + nums[j] + nums[k] < 0)
+                    j++;
+                else if (nums[i] + nums[j] + nums[k] > 0)
+                    k--;
             }
+            i++;
         }
-        return ans;
-
+        return res;
     }
 }
