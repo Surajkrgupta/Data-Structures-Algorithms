@@ -1,20 +1,17 @@
 class Solution {
-    public boolean searchMatrix(int[][] mat, int t) {
-        int n = mat.length;
-        int m = mat[0].length;
-        int l = 0;
-        int h = m * n - 1;
-        while (l <= h) {
-            int mid = (l + h) / 2;
-            int r = mid / m;
-            int c = mid % m;
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        int h=n*m-1;
+        int l=0;
 
-            if (mat[r][c] == t)
-                return true;
-            else if (t < mat[r][c])
-                h=mid-1;
-            else
-                l=mid+1;
+        while(l<=h){
+            int mid=(l+h)/2;
+            int r=mid/m;
+            int c=mid%m;
+            if(matrix[r][c]==target) return true;
+            else if(matrix[r][c]<target) l=mid+1;
+            else h=mid-1;
         }
         return false;
     }
