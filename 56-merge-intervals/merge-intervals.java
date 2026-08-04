@@ -1,20 +1,24 @@
 class Solution {
-    public int[][] merge(int[][] in) {
+    public int[][] merge(int[][] inte) {
+        Arrays.sort(inte,(a,b)->Integer.compare(a[0],b[0]));
+        int n=inte.length;
+        if(n==1) return inte;
+        int s=inte[0][0];
+        int e=inte[0][1];
+
         List<int[]>res=new ArrayList<>();
-        if(in.length==0||in==null) return new int[0][];
-        Arrays.sort(in,(i1,i2)->Integer.compare(i1[0],i2[0]));
-        int s=in[0][0];
-        int e=in[0][1];
-        for(int[] i:in){
-            if(i[0]<=e){
-                e=Math.max(e,i[1]);
+
+        for(int i=0;i<n;i++){
+            if(inte[i][0]<=e){
+                e=Math.max(e,inte[i][1]);
             }else{
                 res.add(new int[]{s,e});
-                s=i[0];
-                e=i[1];
+                s=inte[i][0];
+                e=inte[i][1];
             }
         }
         res.add(new int[]{s,e});
         return res.toArray(new int[0][]);
+        
     }
 }
